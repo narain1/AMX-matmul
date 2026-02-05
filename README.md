@@ -2,6 +2,19 @@
 
 Here is a writeup of my meandering experiences writing code for Intel's Advanced Matrix Extensions (AMX) instruction set. Initially, I relied on Intel's Software Development Emulator (SDE) for AMX development. However, with Visual Studio now offering a more effective debugging experience to inspect tile registers, I invested in a SapphireRapids development rig to streamline my workflow and make things less cumbersome...  
 
+## Converting AMX to Tinygrad UOp Kernels
+
+Want to learn how to convert these AMX operations to tinygrad's Universal Operation (UOp) representation? Check out:
+
+- **[Tinygrad UOp Guide](tinygrad_uop_guide.md)** - Comprehensive guide explaining the UOp singleton pattern and how to map AMX operations to tinygrad UOps
+- **[AMX to Tinygrad Example](amx_to_tinygrad_example.py)** - Runnable Python examples demonstrating the conversion process
+
+The guide covers:
+- Understanding UOp's singleton pattern for efficient AST comparison
+- Mapping AMX tile operations to UOp primitives
+- Converting simple and complex matmul implementations
+- Optimizing UOp trees for different backends
+
 ## Memory layout needed for `tdpbf16ps`
 
 After some deciphering of the cryptic documentation to figure out what it truly meant, I managed to compile the specification of this operation into an extensive list of operations, spanning [4096 lines](https://github.com/HJLebbink/AMX-matmul/blob/main/spec_tdpbf16ps_1tile.txt). Here are the initial five lines:
