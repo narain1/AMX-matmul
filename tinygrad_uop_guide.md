@@ -365,4 +365,4 @@ print(pattern1 == pattern2)  # True - same computation pattern
 
 - [Tinygrad Documentation](https://github.com/tinygrad/tinygrad)
 - [Intel AMX Programming Guide](https://www.intel.com/content/www/us/en/develop/documentation/cpp-compiler-developer-guide-and-reference/top/compiler-reference/intrinsics/intrinsics-for-intel-advanced-matrix-extensions-intel-amx-instructions.html)
-- [AMX MatMul Repository](https://github.com/narain1/AMX-matmul)
+- This repository's assembly implementations in `generated/asm/`

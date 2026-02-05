@@ -402,15 +402,20 @@ def remove_loads(uop: UOp) -> Optional[UOp]:
     This is useful for checking if two implementations perform
     the same computation, regardless of memory access patterns.
     """
-    src = [remove_loads(u) for u in uop.src if u is not None]
+    # Recursively remove loads from source operations
+    src = [remove_loads(u) for u in uop.src]
+    # Filter out None values (removed loads)
     src = tuple([u for u in src if u is not None])
     
+    # If this is a LOAD operation, remove it
     if uop.op == Ops.LOAD:
         return None
     
+    # If we have no sources after filtering, return the original UOp
     if not src and not uop.src:
         return uop
     
+    # Otherwise, create a new UOp with the filtered sources
     return uop.replace(src=src)
 
 
