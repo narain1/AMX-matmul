@@ -189,11 +189,12 @@ def amx_matmul_32x32x64_uop():
     
     # Define tile buffers
     # C has 4 tiles (2x2), A has 4 tiles (2x2), B has 4 tiles (2x2)
-    c_tiles = [[UOp(Ops.DEFINE_GLOBAL, dtypes.float32, arg=(f"C_{i}_{j}", (16, 16))) 
+    # Using unique integer IDs for each tile
+    c_tiles = [[UOp(Ops.DEFINE_GLOBAL, dtypes.float32, arg=(i * 2 + j, (16, 16))) 
                 for j in range(2)] for i in range(2)]
-    a_tiles = [[UOp(Ops.DEFINE_GLOBAL, dtypes.bfloat16, arg=(f"A_{i}_{j}", (16, 32))) 
+    a_tiles = [[UOp(Ops.DEFINE_GLOBAL, dtypes.bfloat16, arg=(4 + i * 2 + j, (16, 32))) 
                 for j in range(2)] for i in range(2)]
-    b_tiles = [[UOp(Ops.DEFINE_GLOBAL, dtypes.bfloat16, arg=(f"B_{i}_{j}", (16, 32))) 
+    b_tiles = [[UOp(Ops.DEFINE_GLOBAL, dtypes.bfloat16, arg=(8 + i * 2 + j, (16, 32))) 
                 for j in range(2)] for i in range(2)]
     
     # First K iteration (k=0)

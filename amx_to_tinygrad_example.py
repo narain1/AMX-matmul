@@ -280,11 +280,12 @@ def amx_matmul_32x32x64_uop() -> List[UOp]:
     stride = 64
     
     # Define tile buffers - 2x2 grid for each matrix
-    c_tiles = [[create_amx_tile(f"C_{i}_{j}", 16, 16, dtypes.float32) 
+    # Using unique integer IDs for each tile
+    c_tiles = [[create_amx_tile(i * 2 + j, 16, 16, dtypes.float32) 
                 for j in range(2)] for i in range(2)]
-    a_tiles = [[create_amx_tile(f"A_{i}_{j}", 16, 32, dtypes.bfloat16) 
+    a_tiles = [[create_amx_tile(4 + i * 2 + j, 16, 32, dtypes.bfloat16) 
                 for j in range(2)] for i in range(2)]
-    b_tiles = [[create_amx_tile(f"B_{i}_{j}", 16, 32, dtypes.bfloat16) 
+    b_tiles = [[create_amx_tile(8 + i * 2 + j, 16, 32, dtypes.bfloat16) 
                 for j in range(2)] for i in range(2)]
     
     # Track updated C tiles
